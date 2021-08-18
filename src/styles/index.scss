@@ -13,11 +13,15 @@ body {
 }
 
 .space-between {
-  .flex;
+  @extend .flex;
   justify-content: space-between;
 }
 
 .align-center {
-  .flex;
+  @extend .flex;
   align-items: center;
+}
+
+.flex-1 {
+  flex: 1;
 }

@@ -1,99 +1,72 @@
 <template>
-  <div class="banner align-center">
-    <!-- <a-carousel arrows>
-      <template #prevArrow>
-        <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
-          <left-circle-outlined />
-        </div>
-      </template>
-      <template #nextArrow>
-        <div class="custom-slick-arrow" style="right: 10px">
-          <right-circle-outlined />
-        </div>
-      </template>
-      <div v-for="(item, index) of state.bannerList" :key="index">
-        <h3>{{ item.imageUrl }}</h3>
+  <div class="banner-wrapper">
+    <el-carousel class="flex-1" height="279px" trigger="click" @change="onCarouselChange">
+      <el-carousel-item v-for="item in state.bannerList" :key="item.imageUrl">
+        <img :src="item.imageUrl + '?imageView&blur=40x20'" class="outter-banner-item" />
+      </el-carousel-item>
+    </el-carousel>
+    <div class="banner-content align-center">
+      <el-carousel class="flex-1" height="279px" trigger="click" @change="onCarouselChange">
+        <el-carousel-item v-for="item in state.bannerList" :key="item.imageUrl">
+          <img :src="item.imageUrl" class="banner-item" />
+        </el-carousel-item>
+      </el-carousel>
+      <div class="download">
+        <a class="download-link"></a>
+        <div>PC 安卓 iPhone WP iPad Mac 六大客户端</div>
       </div>
-    </a-carousel> -->
-    <div class="download">
-      <a class="download-link"></a>
-      <div>PC 安卓 iPhone WP iPad Mac 六大客户端</div>
     </div>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, reactive } from 'vue'
-  // import { Carousel } from 'ant-design-vue'
-  // import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue'
+<script lang="ts" setup>
+  import { ElCarousel, ElCarouselItem } from 'element-plus'
+  import { reactive, ref } from 'vue'
   import { BannerState } from '../data'
   import { banner } from '../service'
-  export default defineComponent({
-    name: 'Banner',
-    //   components: {
-    //     ACarousel: Carousel,
-    //     LeftCircleOutlined,
-    //     RightCircleOutlined
-    //   },
-    setup() {
-      const state = reactive<BannerState>({
-        bannerList: []
-      })
-      const getBannerList = async () => {
-        const { body } = await banner()
-        state.bannerList = body.banner
-      }
-      getBannerList()
-      // banner().then(({ body }) => {
-      //   state.bannerList = body.banner
-      // })
-      return {
-        state
-      }
-    }
+  const state = reactive<BannerState>({
+    bannerList: []
   })
+  const currentBannerIndex = ref(0)
+  const getBannerList = async () => {
+    const { body } = await banner()
+    console.log(body)
+
+    state.bannerList = body.banners
+  }
+  getBannerList()
+
+  const onCarouselChange = (index: number) => {
+    currentBannerIndex.value = index
+  }
 </script>
 <style lang="less" scoped>
-  .ant-carousel :deep(.slick-slide) {
-    text-align: center;
-    height: 284px;
-    background: #364d79;
-    overflow: hidden;
-  }
-
-  .ant-carousel :deep(.slick-arrow.custom-slick-arrow) {
-    width: 25px;
-    height: 25px;
-    font-size: 25px;
-    color: #fff;
-    background-color: rgba(31, 45, 61, 0.11);
-    opacity: 0.3;
-  }
-  .ant-carousel :deep(.custom-slick-arrow:before) {
-    display: none;
-  }
-  .ant-carousel :deep(.custom-slick-arrow:hover) {
-    opacity: 0.5;
-  }
-
-  .ant-carousel :deep(.slick-slide h3) {
-    color: #fff;
-  }
-
-  .banner {
+  .banner-wrapper {
     width: 100%;
-    .ant-carousel {
-      width: 730px;
-      height: 284px;
+    position: relative;
+    .banner-content {
+      position: absolute;
+      top: 0;
+      width: 980px;
+      left: 50%;
+      transform: translate(-50%);
+    }
+    .outter-banner-item {
+      width: 6000px;
+      height: auto;
+    }
+    .banner-item {
+      width: 100%;
+      height: 100%;
     }
     .download {
       height: 100%;
-      width: 100%;
+      width: 254px;
       background-color: #000;
       .download-link {
         display: block;
         width: 100%;
         height: 246px;
-        background: url('src/assets/imgs/download.png');
+        background: url('src/assets/imgs/download.png') no-repeat;
       }
       div {
         margin: 10px auto;
