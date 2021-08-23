@@ -1,6 +1,6 @@
 <template>
   <div class="banner-wrapper">
-    <el-carousel class="flex-1" height="279px" trigger="click" @change="onCarouselChange">
+    <el-carousel ref="outterBanner" class="flex-1" height="279px" trigger="click" :autoplay="false">
       <el-carousel-item v-for="item in state.bannerList" :key="item.imageUrl">
         <img :src="item.imageUrl + '?imageView&blur=40x20'" class="outter-banner-item" />
       </el-carousel-item>
@@ -27,6 +27,8 @@
     bannerList: []
   })
   const currentBannerIndex = ref(0)
+  const outterBanner = ref()
+
   const getBannerList = async () => {
     const { body } = await banner()
     console.log(body)
@@ -37,6 +39,7 @@
 
   const onCarouselChange = (index: number) => {
     currentBannerIndex.value = index
+    outterBanner.value?.setActiveItem(index)
   }
 </script>
 <style lang="less" scoped>

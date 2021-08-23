@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <home-header />
-    <div class="content">
+    <div class="home-content">
       <router-view></router-view>
     </div>
     <home-footer />
@@ -13,9 +13,10 @@
   import HomeFooter from './compoents/HomeFooter.vue'
 </script>
 <style lang="less" scoped>
-  .content {
+  .home-content {
     // width: 980px;
     min-height: 700px;
+    height: 100vh;
     // margin: 0 auto;
     background-color: #fff;
     border: 1px solid #d3d3d3;
