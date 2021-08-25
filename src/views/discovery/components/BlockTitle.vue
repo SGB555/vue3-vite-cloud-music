@@ -1,7 +1,7 @@
 <template>
   <div class="block-title align-center">
     <slot name="label">
-      <div class="block-title__label align-center">
+      <div class="block-title__label align-center flex-1">
         <div v-if="leftPoint" class="block-title__point" />
         <span>{{ label }}</span>
       </div>
@@ -27,6 +27,7 @@
   .block-title {
     border-bottom: 2px solid #c10d0c;
     height: 35px;
+    width: 100%;
     .block-title__label {
       span {
         font-size: 20px;

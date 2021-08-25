@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import styleImport from 'vite-plugin-style-import'
+import StyleImport from 'vite-plugin-style-import'
+import ViteComponents, { AntDesignVueResolver } from 'vite-plugin-components'
+import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    styleImport({
+    StyleImport({
       libs: [
         {
           libraryName: 'element-plus',
@@ -20,9 +22,17 @@ export default defineConfig({
           }
         }
       ]
+    }),
+    ViteComponents({
+      customComponentResolvers: [AntDesignVueResolver()]
     })
   ],
   server: {
     port: 3001
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src')
+    }
   }
 })
