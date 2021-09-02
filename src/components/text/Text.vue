@@ -5,15 +5,13 @@
 </template>
 <script lang="ts" setup>
   import { defineProps, withDefaults } from 'vue'
-  interface Props {
-    size?: string
-  }
+  import { Props } from './Text'
   withDefaults(defineProps<Props>(), {
-    size: '14'
+    size: '14px'
   })
 </script>
 <style scoped lang="scss">
   .text {
-    font-size: v-bind(size + 'px');
+    font-size: v-bind(size);
   }
 </style>

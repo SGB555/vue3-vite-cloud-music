@@ -13,7 +13,7 @@
   withDefaults(defineProps<Props>(), {
     name: '',
     color: '#73787f',
-    size: '14'
+    size: '14px'
   })
 </script>
 <style scoped lang="scss">
@@ -24,6 +24,6 @@
     fill: currentColor;
     overflow: hidden;
     color: v-bind(color);
-    font-size: v-bind(size + 'px');
+    font-size: v-bind(size);
   }
 </style>

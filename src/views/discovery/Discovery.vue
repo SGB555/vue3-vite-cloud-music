@@ -4,14 +4,7 @@
     <div class="discovery-content flex-1 flex">
       <div class="discovery-content__left flex-1">
         <div class="discovery-content__block">
-          <block-title label="热门推荐" left-point>
-            <template #value>
-              <div class="discovery-content__block-value">
-                <Text size="12"> 更多 </Text>
-                <Icon name="icon-arrow" color="#c10d0c" size="16" />
-              </div>
-            </template>
-          </block-title>
+          <Recommend />
         </div>
       </div>
       <div class="discovery-content__right"></div>
@@ -20,9 +13,7 @@
 </template>
 <script lang="ts" setup>
   import Banner from './components/Banner.vue'
-  import BlockTitle from './components/BlockTitle.vue'
-  import Text from '@/components/text/Text.vue'
-  import Icon from '@/components/icon/icon.vue'
+  import Recommend from '@/views/discovery/components/Recommend.vue'
 </script>
 <style lang="scss" scoped>
   .discovery {
